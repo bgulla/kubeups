@@ -1,10 +1,34 @@
-# apcupsd-helm
+![](./docs/kubeUPS_logo.png)
+# 
+`kubeUPS` is a easy-to-install helm chart that allows you to monitor UPS (battery-backup) devices plugged-into your kubernetes clusters. 
 
-## creating prom
-https://linuxacademy.com/blog/kubernetes/running-prometheus-on-kubernetes/
+![](./docs/screenshot.png)
 
-## helm chart
-https://docs.bitnami.com/kubernetes/how-to/create-your-first-helm-chart/
+## What's this for? 💻
+This collection of Docker images deploys a full monitoring stack needed to get you counting those watts with a fine-tooth comb. 
+
+### Containers
+ * [apcupsd](https://github.com/bgulla?tab=repositories&q=apcupsd)
+ * [apcupsd_exporter](https://github.com/mdlayher/apcupsd_exporter) by [mdlayher](https://github.com/mdlayher)
+ * grafana
+ * prometheus
+
+## Prerequesites
+ * a Kubernetes cluster. I personally recommend [k3s](https://k3s.io) with USB-based UPS devices plugged in to random kubelets.
+ * a valid [helm](https://helm.sh) installation
+ * at least 1 `amd64`-architectured kubelet (for now)
+
+## Installation (tldr)
+```bash
+    git clone https://github.com/bgulla/kubeups.git
+    cd kubeups
+    helm upgrade --install kubeups chart/kubeups --debug
+    echo "profit!"
+```
 
 ## TODO
-* Make sure that this works with a pure ARMh environment
+* Make sure that this works with a pure ARMv7 environment (easy)
+* Fully template out the `values.yml` file (easy)
+* deploy a smtp-forwarder for email alerts (moderate time dedication)
+* auto-create ingress (easy)
+* 
