@@ -4,7 +4,7 @@ metadata:
   name: prometheus-deployment
   namespace: kubeups
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: prometheus-server
@@ -43,27 +43,8 @@ spec:
 
         - name: prometheus-storage-volume
           emptyDir: {}
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: prometheus-service
-#   namespace: kubeups
-#   annotations:
-#       prometheus.io/scrape: 'true'
-#       prometheus.io/port:   '9090'
-
-# spec:
-#   selector:
-#     app: prometheus-server
-#   type: NodePort
-#   ports:
-#     - port: 9090
-#       targetPort: 9090
-#       nodePort: 30069
-
-
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -130,4 +111,4 @@ spec:
             - key: kubeUPS-dashboard.json
               path: kubeUPS-dashboard.json
             name: kubeups-dashboard
-        
+          

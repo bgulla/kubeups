@@ -56,3 +56,17 @@ spec:
           privileged: false
           readOnlyRootFilesystem: false
           runAsNonRoot: false
+      - env:
+        - name: MQTT_HOST
+          value: 10.0.5.44
+        - name: PROM_HOST
+          value: 0.0.0.0:9090
+        image: bgulla/apcupsd-mqtt
+        imagePullPolicy: Always
+        name: apcupsd-mqtt
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false

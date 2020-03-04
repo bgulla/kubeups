@@ -58,7 +58,7 @@ spec:
     app: prometheus-server
   type: NodePort
   ports:
-    - port: 8080
+    - port: 9090
       targetPort: 9090
       nodePort: 30069
 
@@ -95,7 +95,7 @@ spec:
           - name: GF_AUTH_BASIC_ENABLED
             value: "true"
           - name: GF_AUTH_ANONYMOUS_ENABLED
-            value: "true"
+            value: "false"
           ports:
             - containerPort: 3000
           volumeMounts:
