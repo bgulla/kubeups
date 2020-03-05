@@ -1,5 +1,4 @@
 ![](./docs/kubeUPS_logo.png)
-# 
 `kubeUPS` is a easy-to-install helm chart that allows you to monitor UPS (battery-backup) devices plugged-into your kubernetes clusters. 
 
 ![](./docs/screenshot.png)
