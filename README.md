@@ -27,7 +27,7 @@ This collection of Docker images deploys a full monitoring stack needed to get y
     # install helm chart   
     git clone https://github.com/bgulla/kubeups.git
     cd kubeups
-    helm upgrade --install kubeups chart/kubeups --debug
+    helm install kubeups chart/kubeups --debug
     echo "profit!"
 ```
 
