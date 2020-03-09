@@ -1,23 +1,17 @@
 ![](./docs/kubeUPS_logo.png)
 ####
-`kubeUPS` is a easy-to-install helm chart that allows you to monitor UPS (battery-backup) devices plugged-into your kubernetes clusters. 
+`kubeUPS` is a easy-to-install helm chart that allows you to monitor UPS (battery-backup) devices plugged-into your kubernetes clusters. Multi-architecture compliant `amd64`,`arm`, `aarch64` or a mixture of all of them combined.
 
 ![](./docs/screenshot.png)
 
 ## What's this for? 💻
 This collection of Docker images deploys a full monitoring stack needed to get you counting those watts with a fine-tooth comb. 
 
-### Containers
- * [apcupsd](https://github.com/bgulla?tab=repositories&q=apcupsd)
- * [apcupsd_exporter](https://github.com/mdlayher/apcupsd_exporter) by [mdlayher](https://github.com/mdlayher)
- * grafana
- * prometheus
 
 ## Prerequesites
- * a Kubernetes cluster. I personally recommend [k3s](https://k3s.io) with USB-based UPS devices plugged in to random kubelets.
+ * a Kubernetes cluster. I recommend [k3s](https://k3s.io) with USB-based UPS devices plugged in to nodes.
  * nodes labeled with `has_ups=true`
  * a valid [helm](https://helm.sh) installation
- * at least 1 `amd64`-architectured kubelet (for now)
 
 ## Installation (tldr)
 ```bash
