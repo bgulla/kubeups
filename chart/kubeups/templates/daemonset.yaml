@@ -48,6 +48,10 @@ spec:
           value: 0.0.0.0:3551
         - name: PROM_HOST
           value: 0.0.0.0:9090
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         image: {{ default "bgulla/apcupsd_exporter" .Values.prometheus_exporter.image.name }}
         imagePullPolicy: {{ default "Always" .Values.prometheus_exporter.image.pullPolicy }}
         name: promexporter

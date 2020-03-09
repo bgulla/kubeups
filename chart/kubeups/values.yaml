@@ -8,13 +8,13 @@ namespace: kubeups
 # Export all UPS stats to a MQTT-Broker
 ## mqtt topic format: /apcupsd/<hostname>/<stat_name>"
 mqtt:
-  enabled: true
+  enabled: false
   image: 
     name: bgulla/apcupsd-mqtt
     pullPolicy: Always
   name: mqttexporter
-  host: 10.0.5.44
-  port: 31353
+  host: kubeups.mqtt.svc
+  port: 1883
   apcupsd_host: 127.0.0.1
   password:
   user: 
