@@ -4,7 +4,7 @@ metadata:
   name: prometheus-server-conf
   labels:
     name: prometheus-server-conf
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 data:
   prometheus.yml: |-
     global:
@@ -71,7 +71,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-datasources
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 data:
   prometheus.yaml: |-
     {
@@ -106,7 +106,7 @@ data:
 kind: ConfigMap
 metadata:
   name: grafana-config
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 
 ---
 
@@ -728,5 +728,5 @@ data:
 kind: ConfigMap
 metadata:
   name: kubeups-dashboard
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 

@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 name: kubeups
+namespace: kubeups
 
 # Export all UPS stats to a MQTT-Broker
 ## mqtt topic format: /apcupsd/<hostname>/<stat_name>"
@@ -19,9 +20,13 @@ mqtt:
   user: 
 
 prometheus:
+  image:
+    name: prom/prometheus:latest
   nodePort: 30069
 
 grafana:
+  image:
+    name: grafana/grafana:latest
   nodePort: 30075
 
 prometheus_exporter:
@@ -29,8 +34,9 @@ prometheus_exporter:
     name: bgulla/apcupsd_exporter
     pullPolicy: Always
 
-## Not yet working
-replicaCount: 1
+apcupsd:
+  image:
+    repository: bgulla/apcupsd
 
 
 ## Not yet working

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: apcupsd
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
   labels:
     k8s-app: apcupsd
 spec:

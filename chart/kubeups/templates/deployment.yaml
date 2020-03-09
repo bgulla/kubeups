@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-deployment
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -13,18 +13,9 @@ spec:
       labels:
         app: prometheus-server
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
       containers:
         - name: prometheus
-          image: prom/prometheus:v2.2.1
+          image: {{ default "prom/prometheus:latest" .Values.prometheus.image.name | quote }}
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
             - "--storage.tsdb.path=/prometheus/"
@@ -56,7 +47,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana-deployment
-  namespace: kubeups
+  namespace: {{ default "kubeups" .Values.namespace | quote }}
 spec:
   replicas: 1
   selector:
@@ -67,18 +58,9 @@ spec:
       labels:
         app: grafana-server
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
       containers:
         - name: grafana
-          image: grafana/grafana:6.6.2
+          image: {{ default "grafana/grafana:latest" .Values.grafana.image.name | quote }}
           env:
           - name: GF_AUTH_BASIC_ENABLED
             value: "true"
