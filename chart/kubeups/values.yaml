@@ -7,16 +7,22 @@ name: kubeups
 # Export all UPS stats to a MQTT-Broker
 ## mqtt topic format: /apcupsd/<hostname>/<stat_name>"
 mqtt:
+  enabled: true
   image: 
     name: bgulla/apcupsd-mqtt
     pullPolicy: Always
-  enabled: true
   name: mqttexporter
   host: 10.0.5.44
   port: 31353
   apcupsd_host: 127.0.0.1
   password:
   user: 
+
+prometheus:
+  nodePort: 30069
+
+grafana:
+  nodePort: 30075
 
 prometheus_exporter:
   image:

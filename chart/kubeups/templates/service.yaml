@@ -13,7 +13,7 @@ spec:
   ports:
     - port: 9090
       targetPort: 9090
-      nodePort: 30069
+      nodePort: {{ .Vaules.prometheus.nodePort }}
 
 ---
 apiVersion: v1
@@ -29,4 +29,4 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30075
+      nodePort: {{ .Vaules.grafana.nodePort }}
