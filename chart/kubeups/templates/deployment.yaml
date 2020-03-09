@@ -40,9 +40,16 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
-
+        
         - name: prometheus-storage-volume
+        {{ if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ template "kubeups.fullname" . }}
+        {{ else }}
           emptyDir: {}
+        {{end}}
+
+
 ---
 
 apiVersion: apps/v1
@@ -111,4 +118,3 @@ spec:
             - key: kubeUPS-dashboard.json
               path: kubeUPS-dashboard.json
             name: kubeups-dashboard
-          
