@@ -2,39 +2,61 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-namespace: kubeups
+name: kubeups
 
+# Export all UPS stats to a MQTT-Broker
+## mqtt topic format: /apcupsd/<hostname>/<stat_name>"
+mqtt:
+  image: 
+    name: bgulla/apcupsd-mqtt
+    pullPolicy: Always
+  enabled: true
+  name: mqttexporter
+  host: 10.0.5.44
+  port: 31353
+  apcupsd_host: 127.0.0.1
+  password:
+  user: 
+
+prometheus_exporter:
+  image:
+    name: bgulla/apcupsd_exporter
+    pullPolicy: Always
+
+## Not yet working
+replicaCount: 1
+
+
+## Not yet working
 image:
-  repository: nginx
+  repository: bgulla/apcupsd
   pullPolicy: IfNotPresent
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
+## Not yet working
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: prometheus
 
-podSecurityContext: {}
-  # fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+## Persist data to a persitent volume
+persistence:
+  enabled: true
+  ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+  ## Default: volume.alpha.kubernetes.io/storage-class: default
+  ##
+  # storageClass:
+  accessMode: ReadWriteOnce
+  size: 8Gi
 
+## Not yet working
 service:
   type: ClusterIP
   port: 80
 
+## Not yet working
 ingress:
   enabled: false
   annotations: {}
@@ -48,6 +70,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+## Not yet working
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -60,8 +83,9 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+## Not yet working
 nodeSelector: {}
-
+## Not yet working
 tolerations: []
-
+## Not yet working
 affinity: {}

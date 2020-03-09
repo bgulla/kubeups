@@ -48,8 +48,8 @@ spec:
           value: 0.0.0.0:3551
         - name: PROM_HOST
           value: 0.0.0.0:9090
-        image: bgulla/apcupsd_exporter
-        imagePullPolicy: Always
+        image: {{ default "bgulla/apcupsd_exporter" .Values.prometheus_exporter.image.name }}
+        imagePullPolicy: {{ default "Always" .Values.prometheus_exporter.image.pullPolicy }}
         name: promexporter
         resources: {}
         securityContext:
@@ -57,3 +57,25 @@ spec:
           privileged: false
           readOnlyRootFilesystem: false
           runAsNonRoot: false
+      {{ if .Values.mqtt.enabled }}
+      - env:
+        - name: APCUPSD_HOST
+          value: {{ .Values.mqtt.apcupsd_host | quote }}
+        - name: MQTT_HOST
+          value: {{ .Values.mqtt.host | quote }}
+        - name: MQTT_PORT
+          value: {{ .Values.mqtt.port | quote }}
+        - name: MQTT_USER
+          value: {{ default "" .Values.mqtt.user | quote }}
+        - name: MQTT_PASSWORD
+          value: {{ default "" .Values.mqtt.password | quote }}
+        image: {{ default "bgulla/apcupsd-mqtt" .Values.mqtt.image.name }}
+        imagePullPolicy: {{ default "Always" .Values.mqtt.image.PullPolicy }}
+        name: {{ default "mqttexporter"  .Values.mqtt.name }}
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+      {{ end }}
