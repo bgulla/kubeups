@@ -65,6 +65,7 @@ This collection of Docker images deploys a full monitoring stack needed to get y
 | serviceAccount.name | string | `"prometheus"` |  |
 | tolerations | list | `[]` |  |
 
+
 ## TODO
 * deploy a smtp-forwarder for email alerts (moderate time dedication)
 
