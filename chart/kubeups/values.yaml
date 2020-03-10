@@ -28,6 +28,11 @@ grafana:
   image:
     name: grafana/grafana:latest
   nodePort: 30075
+  auth:
+    basic:
+      enabled: true
+    anonymous:
+      enabled: true
 
 prometheus_exporter:
   image:

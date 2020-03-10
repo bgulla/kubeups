@@ -14,7 +14,7 @@ spec:
   ports:
     - port: 9090
       targetPort: 9090
-      nodePort: {{ default 30069 .Values.grafana.nodePort  }}
+      nodePort: {{ default 30069 .Values.prometheus.nodePort  }}
 
 ---
 apiVersion: v1

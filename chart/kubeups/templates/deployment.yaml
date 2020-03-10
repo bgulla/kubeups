@@ -63,9 +63,9 @@ spec:
           image: {{ default "grafana/grafana:latest" .Values.grafana.image.name | quote }}
           env:
           - name: GF_AUTH_BASIC_ENABLED
-            value: {{ default "true" .Values.grafana.auth.basic.enabled | quote }}
+            value: "true"
           - name: GF_AUTH_ANONYMOUS_ENABLED
-            value: {{ default "true" .Values.grafana.auth.anonymous.enabled | quote }}
+            value: "true"
           ports:
             - containerPort: 3000
           volumeMounts:
