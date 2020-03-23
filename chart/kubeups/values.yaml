@@ -26,7 +26,7 @@ prometheus:
 
 grafana:
   image:
-    name: grafana/grafana:latest
+    name: grafana/grafana:6.7.1-ubuntu
   nodePort: 30075
   auth:
     basic:
